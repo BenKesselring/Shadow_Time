@@ -41,7 +41,7 @@
     font-size:74px;
 }        
 
-#h1 {position: relative;left:35px;top:5px}
-#h2 {position: relative; left:25px;top:5px}
-#m1 {position: relative;left:35px;top:-5px}
-#m2 {position: relative; left:5px;top:-5px}
+#h1 {position: relative;left:30px;top:5px}
+#h2 {position: relative; left:15px;top:5px}
+#m1 {position: relative;left:35px;top:-10px}
+#m2 {position: relative; left:-5px;top:-10px}
