@@ -1,0 +1,51 @@
+{
+    "appKeys": {
+        "KEY_BG_COLOR": 5,
+        "KEY_H1_SHADOW_COLOR": 1,
+        "KEY_H2_SHADOW_COLOR": 2,
+        "KEY_M1_SHADOW_COLOR": 3,
+        "KEY_M2_SHADOW_COLOR": 4,
+        "KEY_SHADOW_DIRECTION": 0,
+        "KEY_TIME_COLOR": 6
+    },
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "ThatOneDev",
+    "enableMultiJS": false,
+    "longName": "Shadow Time",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/menu_bw.png",
+                "menuIcon": true,
+                "name": "MENU",
+                "type": "png"
+            },
+            {
+                "characterRegex": "[0-9]",
+                "file": "fonts/Ubuntu-B.ttf",
+                "name": "UBUNTU_B_72",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "file": "fonts/Prototype.ttf",
+                "name": "PROTOTYPE_18",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Shadow Time",
+    "targetPlatforms": [
+        "basalt",
+        "chalk"
+    ],
+    "uuid": "d41a833c-9cf4-43c0-b99b-70d02d8564df",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
