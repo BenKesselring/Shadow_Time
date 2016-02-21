@@ -21,12 +21,12 @@
     </p>
     <table id="tblColorSelection" style="display:none">
         <tr>
-            <td><label><input name="datecolor" id="datecolor" class="picker">&nbsp;Date</label></td>
-            <td><label><input name="barcolor" id="barcolor" class="picker">&nbsp;Bar</label></td>
-        </tr>
-        <tr>
             <td><label><input name="bgcolor" id="bgcolor" class="picker">&nbsp;Background</label></td>
             <td><label><input name="timecolor" id="timecolor" class="picker">&nbsp;Time</label></td>
+        </tr>
+        <tr>
+            <td><label><input name="datecolor" id="datecolor" class="picker">&nbsp;Date</label></td>
+            <td><label><input name="barcolor" id="barcolor" class="picker">&nbsp;Bar</label></td>
         </tr>
         <tr>
             <td><label><input name="h1shadowcolor" id="h1shadowcolor" class="picker">&nbsp;1st hr shadow</label></td>
@@ -73,12 +73,22 @@
             </tr>
         </table>
 
-        <div id="xForm">
+        <div class="screen number">
+            <span id="h1">2</span>
+            <span id="h2">0</span>
+            <span id="m1">0</span>
+            <span id="m2">3</span>
+        </div>
+
+        <img id="imgpebble" style="position:relative;top:-506px;left:23px;z-index:10" />
+
+        <div style="position:relative;top:-500px" id="xForm">
           
             <br />
 
             <input id="xbtnSave" type="button" value="Save" style="margin-right:30px">
             <input id="xbtnCancel" type="button" value="Cancel" style="margin-right:30px">
+            
         </div>
 
     </div>
