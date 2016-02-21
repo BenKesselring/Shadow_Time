@@ -38,10 +38,10 @@
 .number {
     font-family: arial;
     font-weight: bold;
-    font-size:78px;
+    font-size:74px;
 }        
 
-#h1 {position: relative;left:65px;top:10px}
-#h2 {position: relative; left:15px;top:10px}
-#m1 {position: relative;left:5px;top:-5px}
+#h1 {position: relative;left:55px;top:5px}
+#h2 {position: relative; left:15px;top:5px}
+#m1 {position: relative;left:15px;top:-5px}
 #m2 {position: relative; left:15px;top:-5px}
