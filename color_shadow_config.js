@@ -263,9 +263,9 @@ $(document).ready(function () {
     if(settings==null) {
         settings = {};
       
-        settings.bgcolor = GColor.fromHex("555555");
+        settings.bgcolor = GColor.fromHex("550000");
         settings.timecolor = GColor.fromHex("FFFFFF");
-        settings.datecolor = GColor.fromHex("000000");
+        settings.datecolor = GColor.fromHex("550000");
         settings.barcolor = GColor.fromHex("FFFFFF");
         settings.h1shadowcolor = GColor.fromHex("000000");
         settings.h2shadowcolor = GColor.fromHex("000000");
