@@ -9,10 +9,8 @@ GColor color_inverted(GColor source) {
     inverted= GColorWhite;
   if(gcolor_equal(source, GColorWhite))
     inverted= GColorBlack;
-  #ifdef PBL_COLOR
-    if(!gcolor_equal(source, GColorClear)) //GColorClear should not change
-      inverted.argb= source.argb ^ 0b00111111;
-  #endif
+  if(!gcolor_equal(source, GColorClear)) //GColorClear should not change
+    inverted.argb= source.argb ^ 0b00111111;
   return inverted;
 }   
   

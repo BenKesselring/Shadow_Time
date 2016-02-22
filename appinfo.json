@@ -1,6 +1,8 @@
 {
     "appKeys": {
+        "KEY_BAR_COLOR": 8,
         "KEY_BG_COLOR": 5,
+        "KEY_DATE_COLOR": 7,
         "KEY_H1_SHADOW_COLOR": 1,
         "KEY_H2_SHADOW_COLOR": 2,
         "KEY_M1_SHADOW_COLOR": 3,

@@ -11,16 +11,10 @@ Pebble.addEventListener("showConfiguration",
    
     //getting platform
     var platform;
-    if(Pebble.getActiveWatchInfo) {
-      // Available for use!
-      platform = Pebble.getActiveWatchInfo().platform;
-    } else {
-      // Not available, handle gracefully
-      platform = 'aplite';
-    }
+    platform = Pebble.getActiveWatchInfo().platform;
     
     //Load the remote config page
-    Pebble.openURL("http://codecorner.galanter.net/pebble/color_shadow/color_shadow_config.html?platform=" + platform);
+    Pebble.openURL("http://benkesselring.github.io/Shadow_Time/color_shadow_config.html?platform=" + platform);
     
   }
 );
@@ -44,7 +38,9 @@ Pebble.addEventListener("webviewclosed",
             "KEY_M1_SHADOW_COLOR": settings.m1shadowcolor,
             "KEY_M2_SHADOW_COLOR": settings.m2shadowcolor,
             "KEY_BG_COLOR": settings.bgcolor,
-            "KEY_TIME_COLOR": settings.timecolor
+            "KEY_TIME_COLOR": settings.timecolor,
+            "KEY_DATE_COLOR": settings.datecolor,
+            "KEY_BAR_COLOR": settings.barcolor
           },
         function(e) {
           console.log("Sending settings data...");

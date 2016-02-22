@@ -24,8 +24,12 @@ EffectOffset oh1, oh2, om1, om2;
 GColor time_color, bg_color, date_color, bar_color; 
 
 char s_hours[3], s_minutes[3];
-char s_date[] = "Fri, Apr 24";
-char buffer_battery[]="100%";
+
+#ifndef PBL_ROUND
+char s_date[] = "Fri, Apr 24 ";
+#else
+char s_date[] = "Fri, Apr 24 ";
+#endif
 
 
 #ifndef PBL_SDK_2
@@ -44,6 +48,7 @@ void direct_shadow(uint8_t direction) {
   
   Layer *layer;
   Layer *window_layer = window_get_root_layer(my_window);
+  GRect bounds = layer_get_bounds(window_layer);
   
   #ifdef PBL_PLATFORM_BASALT
     uint8_t length = 90;
@@ -62,9 +67,7 @@ void direct_shadow(uint8_t direction) {
       layer = effect_layer_get_layer(m2); layer_remove_from_parent(layer); layer_add_child(window_layer, layer);
 
       #ifndef PBL_ROUND
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(2,-2 ,140, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentRight);
-      #else
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0, 15 ,180, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentCenter);
+        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0,-2 ,bounds.size.w, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentRight);
       #endif
     
       break;
@@ -78,9 +81,7 @@ void direct_shadow(uint8_t direction) {
       layer = effect_layer_get_layer(m1); layer_remove_from_parent(layer); layer_add_child(window_layer, layer);
       
       #ifndef PBL_ROUND
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(2,-2,140, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentLeft);
-      #else
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0, 15 ,180, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentCenter);
+        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0,-2,bounds.size.w, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentLeft);
       #endif
         
       break;
@@ -95,9 +96,7 @@ void direct_shadow(uint8_t direction) {
       layer = effect_layer_get_layer(h1); layer_remove_from_parent(layer); layer_add_child(window_layer, layer);
     
       #ifndef PBL_ROUND
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(2,146,140,23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentLeft);
-      #else
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0, 138 ,180, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentCenter);
+        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0,146,bounds.size.w,23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentLeft);
       #endif  
     
       break;
@@ -112,9 +111,7 @@ void direct_shadow(uint8_t direction) {
       layer = effect_layer_get_layer(m2); layer_remove_from_parent(layer); layer_add_child(window_layer, layer);
     
       #ifndef PBL_ROUND
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(2,146,140,23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentRight);
-      #else
-        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0, 138 ,180, 23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentCenter);
+        layer_set_frame(text_layer_get_layer(text_layer_date), GRect(0,146,bounds.size.w,23)); text_layer_set_text_alignment(text_layer_date, GTextAlignmentRight);
       #endif  
       
       break;
@@ -152,16 +149,6 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context) {
        
         window_set_background_color(my_window,  (GColor){.argb =t->value->uint8});
         break;
-      case KEY_BAR_COLOR:
-        persist_write_int(KEY_BAR_COLOR, t->value->uint8);
-    
-        text_layer_set_text_color(text_layer_date, (GColor){.argb =t->value->uint8});
-        break;
-      case KEY_DATE_COLOR:
-        persist_write_int(KEY_DATE_COLOR, t->value->uint8);
-    
-        text_layer_set_background_color(text_layer_date, (GColor){.argb =t->value->uint8});
-        break;
       case KEY_TIME_COLOR:
         persist_write_int(KEY_TIME_COLOR, t->value->uint8);
  
@@ -177,6 +164,16 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context) {
       case KEY_SHADOW_DIRECTION:
         persist_write_int(KEY_SHADOW_DIRECTION, t->value->uint8);
         direct_shadow(t->value->uint8);
+        break;
+      case KEY_DATE_COLOR:
+        persist_write_int(KEY_DATE_COLOR, t->value->uint8);
+    
+        text_layer_set_text_color(text_layer_date, (GColor){.argb =t->value->uint8});
+        break;
+      case KEY_BAR_COLOR:
+        persist_write_int(KEY_BAR_COLOR, t->value->uint8);
+    
+        text_layer_set_background_color(text_layer_date, (GColor){.argb =t->value->uint8});
         break;
      
     }    
@@ -209,8 +206,10 @@ void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
     }  
     
     if (units_changed & DAY_UNIT) { // on day change - change date
-      strftime(s_date, sizeof(s_date), "%a, %b %d", tick_time);
-      text_layer_set_text(text_layer_date, s_date);
+      #ifndef PBL_ROUND
+        strftime(s_date, sizeof(s_date), "%a, %b %d ", tick_time);
+        text_layer_set_text(text_layer_date, s_date);
+      #endif
       
     }
   
@@ -236,9 +235,13 @@ void handle_init(void) {
   GRect bounds = layer_get_bounds(window_layer);
 
   time_color = persist_read_int(KEY_TIME_COLOR)? (GColor){.argb = persist_read_int(KEY_TIME_COLOR)} : GColorWhite;
+  date_color = persist_read_int(KEY_DATE_COLOR)? (GColor){.argb = persist_read_int(KEY_DATE_COLOR)} : GColorBlack;
+  bar_color = persist_read_int(KEY_BAR_COLOR)? (GColor){.argb = persist_read_int(KEY_BAR_COLOR)} : GColorWhite;
   text_layer_hours = create_text_layer(GRect(30,10,bounds.size.w-30,85), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_UBUNTU_B_72)), time_color, GColorClear, GTextAlignmentCenter, my_window);
   text_layer_minutes = create_text_layer(GRect(0,70,bounds.size.w-30,85), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_UBUNTU_B_72)), time_color, GColorClear, GTextAlignmentCenter, my_window);
-  text_layer_date = create_text_layer(GRect(2,-2,140,23), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_PROTOTYPE_18)), date_color , bar_color, GTextAlignmentRight, my_window);
+  #ifndef PBL_ROUND
+  text_layer_date = create_text_layer(GRect(0,-2,bounds.size.w,23), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_PROTOTYPE_18)), date_color , bar_color, GTextAlignmentRight, my_window);
+  #endif
  
   
   //creating shadow layers
