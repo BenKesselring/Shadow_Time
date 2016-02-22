@@ -27,8 +27,6 @@ char s_hours[3], s_minutes[3];
 
 #ifndef PBL_ROUND
 char s_date[] = "Fri, Apr 24 ";
-#else
-char s_date[] = "Fri, Apr 24 ";
 #endif
 
 
@@ -228,27 +226,27 @@ void handle_init(void) {
   
   my_window = window_create();
   
-  bg_color =  persist_read_int(KEY_BG_COLOR) ? (GColor){.argb =  persist_read_int(KEY_BG_COLOR) }: GColorYellow;
+  bg_color =  persist_read_int(KEY_BG_COLOR) ? (GColor){.argb =  persist_read_int(KEY_BG_COLOR) }: GColorBulgarianRose;
   window_set_background_color(my_window, bg_color );
   
   Layer *window_layer = window_get_root_layer(my_window);
   GRect bounds = layer_get_bounds(window_layer);
 
   time_color = persist_read_int(KEY_TIME_COLOR)? (GColor){.argb = persist_read_int(KEY_TIME_COLOR)} : GColorWhite;
-  date_color = persist_read_int(KEY_DATE_COLOR)? (GColor){.argb = persist_read_int(KEY_DATE_COLOR)} : GColorBlack;
+  date_color = persist_read_int(KEY_DATE_COLOR)? (GColor){.argb = persist_read_int(KEY_DATE_COLOR)} : GColorBulgarianRose;
   bar_color = persist_read_int(KEY_BAR_COLOR)? (GColor){.argb = persist_read_int(KEY_BAR_COLOR)} : GColorWhite;
   text_layer_hours = create_text_layer(GRect(30,10,bounds.size.w-30,85), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_UBUNTU_B_72)), time_color, GColorClear, GTextAlignmentCenter, my_window);
   text_layer_minutes = create_text_layer(GRect(0,70,bounds.size.w-30,85), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_UBUNTU_B_72)), time_color, GColorClear, GTextAlignmentCenter, my_window);
   #ifndef PBL_ROUND
-  text_layer_date = create_text_layer(GRect(0,-2,bounds.size.w,23), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_PROTOTYPE_18)), date_color , bar_color, GTextAlignmentRight, my_window);
+    text_layer_date = create_text_layer(GRect(0,-2,bounds.size.w,23), fonts_load_custom_font(resource_get_handle(RESOURCE_ID_PROTOTYPE_18)), date_color , bar_color, GTextAlignmentRight, my_window);
   #endif
  
   
   //creating shadow layers
-  h1 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(100, 116) ,25,45,60), time_color, persist_read_int(KEY_H1_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_H1_SHADOW_COLOR)} : GColorBrilliantRose, 90, 90, 1, &oh1, my_window);
-  h2 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(59, 76), 25,45,60), time_color, persist_read_int(KEY_H2_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_H2_SHADOW_COLOR)} : GColorPurpureus, 90, 90, 1, &oh2, my_window);
-  m1 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(130, 146) ,85,45,70), time_color, persist_read_int(KEY_M1_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_M1_SHADOW_COLOR)}: GColorMayGreen, 90, 90, 1, &om1, my_window);
-  m2 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(89, 106) ,85,45,70), time_color, persist_read_int(KEY_M2_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_M2_SHADOW_COLOR)}: GColorLiberty, 90, 90, 1, &om2, my_window);
+  h1 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(100, 116) ,25,45,60), time_color, persist_read_int(KEY_H1_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_H1_SHADOW_COLOR)} : GColorBlack, 90, 90, 1, &oh1, my_window);
+  h2 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(59, 76), 25,45,60), time_color, persist_read_int(KEY_H2_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_H2_SHADOW_COLOR)} : GColorBlack, 90, 90, 1, &oh2, my_window);
+  m1 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(130, 146) ,85,45,70), time_color, persist_read_int(KEY_M1_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_M1_SHADOW_COLOR)}: GColorBlack, 90, 90, 1, &om1, my_window);
+  m2 = create_shadow_layer(GRect(bounds.size.w - PBL_IF_RECT_ELSE(89, 106) ,85,45,70), time_color, persist_read_int(KEY_M2_SHADOW_COLOR)? (GColor){.argb = persist_read_int(KEY_M2_SHADOW_COLOR)}: GColorBlack, 90, 90, 1, &om2, my_window);
     
     
   direct_shadow( persist_read_int(KEY_SHADOW_DIRECTION)?  persist_read_int(KEY_SHADOW_DIRECTION) : SHADOW_DIRECTION_TO_BOTTOM_RIGHT);  
