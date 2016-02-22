@@ -156,6 +156,9 @@ function changeColor(picker_id, color) {
 
 function applySettingsToPreview() {
     $(":radio[value=" + settings.shadowdirecton + "]").attr('checked', true);
+    
+    $("#datecolor").spectrum("set", '#' + GColor.toHex(settings.datecolor));
+    $("#barcolor").spectrum("set", '#' + GColor.toHex(settings.barcolor));
 
     $(".number").css("color", '#' + GColor.toHex(settings.timecolor));
     $("#timecolor").spectrum("set", '#' + GColor.toHex(settings.timecolor));
@@ -260,14 +263,14 @@ $(document).ready(function () {
     if(settings==null) {
         settings = {};
       
-        settings.bgcolor = GColor.fromHex("FFFF00");
+        settings.bgcolor = GColor.fromHex("555555");
         settings.timecolor = GColor.fromHex("FFFFFF");
-        settings.datecolor = GColor.fromHex("FFFFFF");
-        settings.barcolor = GColor.fromHex("000000");
-        settings.h1shadowcolor = GColor.fromHex("0000FF");
-        settings.h2shadowcolor = GColor.fromHex("FF0000");
-        settings.m1shadowcolor = GColor.fromHex("008000");
-        settings.m2shadowcolor = GColor.fromHex("800080");
+        settings.datecolor = GColor.fromHex("000000");
+        settings.barcolor = GColor.fromHex("FFFFFF");
+        settings.h1shadowcolor = GColor.fromHex("000000");
+        settings.h2shadowcolor = GColor.fromHex("000000");
+        settings.m1shadowcolor = GColor.fromHex("000000");
+        settings.m2shadowcolor = GColor.fromHex("000000");
         settings.shadowdirecton = SHADOW.DIRECTON.TO_BOTTOM_RIGHT;
     }
 
