@@ -124,6 +124,12 @@ function changeColor(picker_id, color) {
             settings.timecolor = gcolor;
             $(".number").css("color", '#' + hcolor);
             break;
+        case 'datecolor':
+            settings.datecolor = gcolor;
+            break;
+        case 'barcolor':
+            settings.barcolor = gcolor;
+            break;
         case 'h1shadowcolor':
             settings.h1shadowcolor = gcolor;
             draw_shadow('h1', '#' + hcolor, settings.shadowdirecton)
@@ -263,47 +269,25 @@ $(document).ready(function () {
         settings.shadowdirecton = SHADOW.DIRECTON.TO_BOTTOM_RIGHT;
     }
 
+    
+    $('#imgpebble').attr('src', 'pebbletime.png');
+    $('#tblColorSelection').show();
+    $('#ptblColorSelection').show();
+    $('#codecont').show();
+    $('#presetcont').show();
 
-    if (getURLVariable('platform') == 'aplite') {
+    $('.number').css({
+        top:'-290px',
+        left: '77px'
+    });
 
-        settings.bgcolor = GColor.fromHex("000000");
-        settings.timecolor = GColor.fromHex("FFFFFF");
-        settings.h1shadowcolor = GColor.fromHex("808080");
-        settings.h2shadowcolor = GColor.fromHex("808080");
-        settings.m1shadowcolor = GColor.fromHex("808080");
-        settings.m2shadowcolor = GColor.fromHex("808080");
+    $('#tblDir').css({
+        left: "0",
+        top: "-25px"
+    });
 
-        $('#imgpebble').attr('src', 'pebbleoriginal.png');
-        $('.number').css({
-            top: '-270px',
-            left: '65px'
-        })
-
-        $('#tblDir').css({
-            left: "-12px",
-            top: "10px"
-        });
-
-    } else {
-        $('#imgpebble').attr('src', 'pebbletime.png');
-        $('#tblColorSelection').show();
-        $('#ptblColorSelection').show();
-        $('#codecont').show();
-        $('#presetcont').show();
-
-        $('.number').css({
-            top:'-290px',
-            left: '77px'
-        });
-
-        $('#tblDir').css({
-            left: "0",
-            top: "-25px"
-        });
-
-        //displaying current settings
-        $('#code').val(JSON.stringify(settings));
-    }
+    //displaying current settings
+    $('#code').val(JSON.stringify(settings));
 
     $("input[type='radio']").checkboxradio();
     $("input[type='button']").button({ inline: true, mini: true, theme: "b" });
